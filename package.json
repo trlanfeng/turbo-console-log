@@ -2,8 +2,8 @@
   "name": "turbo-console-log",
   "displayName": "Turbo Console Log",
   "description": "Automating the process of writing meaningful log messages.",
-  "version": "1.4.0",
-  "publisher": "ChakrounAnas",
+  "version": "1.5.0",
+  "publisher": "trlanfeng",
   "engines": {
     "vscode": "^1.19.0"
   },
@@ -57,6 +57,11 @@
           ],
           "default": "\"",
           "description": "Double quotes, single quotes or backtick"
+        },
+        "turboConsoleLog.logFunction": {
+          "type": "string",
+          "default": "console.log",
+          "description": "The function to log message"
         }
       }
     },
@@ -137,11 +142,11 @@
   },
   "license": "SEE LICENSE IN LICENSE.txt",
   "bugs": {
-    "url": "https://github.com/Chakroun-Anas/turbo-console-log/issues",
-    "email": "chakroun.anas@outlook.com"
+    "url": "https://github.com/trlanfeng/turbo-console-log/issues",
+    "email": "trlanfeng@foxmail.com"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Chakroun-Anas/turbo-console-log"
+    "url": "https://github.com/trlanfeng/turbo-console-log"
   }
 }

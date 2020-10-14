@@ -40,6 +40,8 @@ Properties:
 
 - turboConsoleLog.quote (enum): Double quotes (""), single quotes ('') or backtick(``).
 
+- turboConsoleLog.logFunction (string): The function to log message.
+
 A wrapped log message :
 
 ![alt text](https://image.ibb.co/h9yfYU/wrap_log_message.gif "Wrapping The log message")

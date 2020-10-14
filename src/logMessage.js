@@ -18,7 +18,8 @@ function message(
   addSemicolonInTheEnd: boolean,
   insertEnclosingClass: boolean,
   insertEnclosingFunction: boolean,
-  tabSize: number
+  tabSize: number,
+  logFunction: string
 ): string {
   const classThatEncloseTheVar: string = enclosingBlockName(
     document,
@@ -37,15 +38,15 @@ function message(
   );
   const spacesBeforeMsg: string = spaces(document, lineOfSelectedVar, tabSize);
   const semicolon: string = addSemicolonInTheEnd ? ";" : "";
-  const debuggingMsg: string = `console.log(${quote}${logMessagePrefix}${
+  const debuggingMsg: string = `${logFunction}(${quote}${logMessagePrefix}${
     logMessagePrefix.length !== 0 ? ": " : ""
   }${insertEnclosingClass ? classThatEncloseTheVar : ""}${
     insertEnclosingFunction ? funcThatEncloseTheVar : ""
   }${selectedVar}${quote}, ${selectedVar})${semicolon}`;
   if (wrapLogMessage) {
     // 16 represents the length of console.log("");
-    const wrappingMsg: string = `console.log(${quote}${logMessagePrefix}: ${"-".repeat(
-      debuggingMsg.length - 16
+    const wrappingMsg: string = `${logFunction}(${quote}${logMessagePrefix}: ${"-".repeat(
+      debuggingMsg.length - (logFunction.length + 4)
     )}${quote})${semicolon}`;
     return `${
       lineOfLogMsg === document.lineCount ? "\n" : ""
@@ -226,7 +227,7 @@ function spaces(
   ) {
     const nextLine: vscode.TextLine = document.lineAt(line + 1);
     const nextLineTextChars: string[] = nextLine.text.split("");
-    if (nextLineTextChars.filter(char => char !== " ").length !== 0) {
+    if (nextLineTextChars.filter((char) => char !== " ").length !== 0) {
       if (
         nextLine.firstNonWhitespaceCharacterIndex >
         currentLine.firstNonWhitespaceCharacterIndex
@@ -356,6 +357,7 @@ function blockClosingBraceLineNum(
 
 /**
  * Detect all log messages inserted by this extension and then return their ranges
+ * todo delete all the custom logFunction
  * @author Chakroun Anas <chakroun.anas@outlook.com>
  */
 function detectAll(
@@ -369,7 +371,7 @@ function detectAll(
     const turboConsoleLogMessage: RegExp = /console\.log\(('|"|`).*/;
     if (turboConsoleLogMessage.test(document.lineAt(i).text)) {
       const logMessage: LogMessage = {
-        lines: []
+        lines: [],
       };
       let nbrOfOpenParenthesis: number = 0;
       let nbrOfCloseParenthesis: number = 0;

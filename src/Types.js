@@ -15,5 +15,6 @@ export type ExtensionProperties = {
   addSemicolonInTheEnd: boolean,
   insertEnclosingClass: boolean,
   insertEnclosingFunction: boolean,
-  quote: string
+  quote: string,
+  logFunction: string
 };

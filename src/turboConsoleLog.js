@@ -51,7 +51,8 @@ function activate(context: vscode.ExtensionContext) {
                 properties.addSemicolonInTheEnd,
                 properties.insertEnclosingClass,
                 properties.insertEnclosingFunction,
-                tabSize
+                tabSize,
+                properties.logFunction
               )
             );
           });
@@ -181,6 +182,12 @@ function extensionProperties(
     workspaceConfig.insertEnclosingFunction || true;
   // $FlowFixMe
   extensionProperties.quote = workspaceConfig.quote || '"';
+
+  extensionProperties.logFunction =
+    // $FlowFixMe
+    workspaceConfig.logFunction && workspaceConfig.logFunction
+      ? workspaceConfig.logFunction
+      : "console.log";
   return extensionProperties;
 }
 
